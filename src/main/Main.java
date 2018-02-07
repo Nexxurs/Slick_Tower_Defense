@@ -4,6 +4,10 @@ import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.SlickException;
 
+/**
+ * VM Option to run on windows:
+ *  -Djava.library.path=libs/
+ */
 public class Main {
 
     public static final int WIDTH = 600;
