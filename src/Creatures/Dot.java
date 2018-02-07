@@ -18,6 +18,8 @@ public class Dot extends AbstractCreature {
     }
 
     public void drawMe(Graphics graphics) {
+        if(canDespawn()) return;
+
         graphics.setColor(Color.red);
         graphics.draw(shape);
         graphics.fill(shape);

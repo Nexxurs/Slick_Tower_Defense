@@ -28,6 +28,5 @@ public class Main {
         container.setVSync(true);
         container.start();
 
-
     }
 }

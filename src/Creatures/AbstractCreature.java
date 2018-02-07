@@ -4,7 +4,7 @@ import Map.Field.Path;
 import interfaces.Drawable;
 import interfaces.Updateable;
 import org.newdawn.slick.geom.Shape;
-import org.newdawn.slick.geom.Transform;
+import util.ShapeUtil;
 
 public abstract class AbstractCreature implements Drawable, Updateable {
 
@@ -23,32 +23,39 @@ public abstract class AbstractCreature implements Drawable, Updateable {
     protected abstract float getMovespeed();
 
     public void update(int delta) {
+        if(despawn) return;
+
         if(health <=0){
             despawn = true;
         }
 
+        float startDistance = ShapeUtil.getDistanceBetweenShapeCenters(shape, nextPath.getShape());
+
         float[] moveVector = getMovementVector(shape, nextPath.getShape());
 
         //ms*100/delta
-        float transX = moveVector[0]*getMovespeed()*100/delta;
-        float transY = moveVector[1]*getMovespeed()*100/delta;
+        float transX = moveVector[0]*getMovespeed()*delta/100;
+        float transY = moveVector[1]*getMovespeed()*delta/100;
 
-        Transform transform = Transform.createTranslateTransform(transX, transY);
+        float moveDistance = pythagoras(transX, transY);
 
-        shape.transform(transform);
+        shape.setX(shape.getX() + transX);
+        shape.setY(shape.getY() + transY);
 
-        float[] afterVector = getMovementVector(shape, nextPath.getShape());
-        if(afterVector[0] != moveVector[0] || afterVector[1] != moveVector[1]){
+        if(startDistance <= moveDistance){
             nextPath = nextPath.getNext();
             if(nextPath == null){
                 despawn = true;
-                //todo despawn gscheit machen!
             }
         }
     }
 
     public boolean canDespawn() {
         return despawn;
+    }
+
+    private static float pythagoras(float a, float b){
+        return (float) Math.abs(Math.sqrt((a*a)+(b*b)));
     }
 
     private static float[] getMovementVector(Shape me, Shape destination){

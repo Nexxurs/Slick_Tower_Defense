@@ -1,5 +1,7 @@
 package Map;
 
+import Creatures.AbstractCreature;
+import Creatures.Dot;
 import Map.Field.AbstractField;
 import Map.Field.Path;
 import main.Global;
@@ -8,6 +10,7 @@ import org.newdawn.slick.Graphics;
 public class SimpleMap extends AbstractMap {
 
     AbstractField[][] fields;
+    AbstractCreature creature;
 
     public SimpleMap(int w, int h){
         super(w,h);
@@ -30,6 +33,9 @@ public class SimpleMap extends AbstractMap {
             lastOne = newOne;
         }
 
+
+        creature = new Dot(0,0, (Path)fields[0][2]);
+
     }
 
     public void drawMe(Graphics graphics) {
@@ -40,9 +46,10 @@ public class SimpleMap extends AbstractMap {
                     current.drawMe(graphics);
             }
         }
+        creature.drawMe(graphics);
     }
 
     public void update(int delta) {
-
+        creature.update(delta);
     }
 }
