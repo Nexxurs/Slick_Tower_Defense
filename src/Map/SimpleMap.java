@@ -4,13 +4,21 @@ import Creatures.AbstractCreature;
 import Creatures.Dot;
 import Map.Field.AbstractField;
 import Map.Field.Path;
+import Turret.AbstractTurret;
+import Turret.Projectile.SimpleSingletargetProjectile;
+import Turret.RectangleTurret;
 import main.Global;
 import org.newdawn.slick.Graphics;
 
+import java.util.List;
+
 public class SimpleMap extends AbstractMap {
+    //todo NEU
 
     AbstractField[][] fields;
     AbstractCreature creature;
+    AbstractTurret turret;
+    SimpleSingletargetProjectile proj;
 
     public SimpleMap(int w, int h){
         super(w,h);
@@ -36,6 +44,10 @@ public class SimpleMap extends AbstractMap {
 
         creature = new Dot(0,0, (Path)fields[0][2]);
 
+        turret = new RectangleTurret(300,30);
+
+        proj = new SimpleSingletargetProjectile(300,300,10,3,creature);
+
     }
 
     public void drawMe(Graphics graphics) {
@@ -47,9 +59,17 @@ public class SimpleMap extends AbstractMap {
             }
         }
         creature.drawMe(graphics);
+        turret.drawMe(graphics);
+        proj.drawMe(graphics);
     }
 
     public void update(int delta) {
         creature.update(delta);
+        proj.update(delta);
+    }
+
+    List<AbstractCreature> getAllCurrentCreatures() {
+        return null;
+        //todo
     }
 }

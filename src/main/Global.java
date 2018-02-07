@@ -1,5 +1,7 @@
 package main;
 
+import Map.AbstractMap;
+
 public class Global {
     private static Global ourInstance = new Global();
 
@@ -8,6 +10,7 @@ public class Global {
     }
 
     private int fieldSideLenght, numFieldsHeight, numFieldsWidth;
+    private AbstractMap map;
 
     private Global() {
 
@@ -35,5 +38,13 @@ public class Global {
 
     public void setNumFieldsWidth(int numFieldsWidth) {
         this.numFieldsWidth = numFieldsWidth;
+    }
+
+    public AbstractMap getCurrentMap() {
+        return map;
+    }
+
+    public void setCurrentMap(AbstractMap map) {
+        this.map = map;
     }
 }

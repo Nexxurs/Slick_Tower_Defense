@@ -10,7 +10,7 @@ public abstract class AbstractCreature implements Drawable, Updateable {
 
     private float health;
     protected Shape shape;
-    private boolean despawn;
+    protected boolean despawn;
     private Path nextPath;
 
     public AbstractCreature(Shape shape, Path startPath, float health){
@@ -22,15 +22,24 @@ public abstract class AbstractCreature implements Drawable, Updateable {
 
     protected abstract float getMovespeed();
 
+    public void handleDMG(float dmg){
+        health -= dmg;
+        if(health <= 0){
+            despawn = true;
+        }
+    }
+
+    public Shape getShape(){
+        return shape;
+    }
+
     public void update(int delta) {
         if(despawn) return;
-
         if(health <=0){
             despawn = true;
         }
 
         float startDistance = ShapeUtil.getDistanceBetweenShapeCenters(shape, nextPath.getShape());
-
         float[] moveVector = getMovementVector(shape, nextPath.getShape());
 
         //ms*100/delta
