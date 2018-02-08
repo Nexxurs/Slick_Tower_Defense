@@ -4,6 +4,7 @@ import Map.Field.Path;
 import interfaces.Drawable;
 import interfaces.Updateable;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 import util.ShapeUtil;
 
 public abstract class AbstractCreature implements Drawable, Updateable {
@@ -40,16 +41,12 @@ public abstract class AbstractCreature implements Drawable, Updateable {
         }
 
         float startDistance = ShapeUtil.getDistanceBetweenShapeCenters(shape, nextPath.getShape());
-        float[] moveVector = getMovementVector(shape, nextPath.getShape());
+        Vector2f startLocation = new Vector2f(getShape().getLocation());
+        ShapeUtil.moveShapeToCenter(shape, nextPath.getShape(), getMovespeed(), delta);
 
-        //ms*100/delta
-        float transX = moveVector[0]*getMovespeed()*delta/100;
-        float transY = moveVector[1]*getMovespeed()*delta/100;
+        Vector2f endLocation = new Vector2f(getShape().getLocation());
 
-        float moveDistance = pythagoras(transX, transY);
-
-        shape.setX(shape.getX() + transX);
-        shape.setY(shape.getY() + transY);
+        float moveDistance = startLocation.distance(endLocation);
 
         if(startDistance <= moveDistance){
             nextPath = nextPath.getNext();

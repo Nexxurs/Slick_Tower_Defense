@@ -20,10 +20,9 @@ public abstract class AbstractMap implements Drawable, Updateable {
     public AbstractMap(int width, int height){
         this.width = width;
         this.height = height;
-        creatures = new LinkedList<AbstractCreature>();
-        turrets = new LinkedList<AbstractTurret>();
-        projectiles = new LinkedList<AbstractProjectile>();
-        //todo
+        creatures = new LinkedList<>();
+        turrets = new LinkedList<>();
+        projectiles = new LinkedList<>();
     }
 
     public void drawCreatures(Graphics graphics) {
@@ -46,11 +45,55 @@ public abstract class AbstractMap implements Drawable, Updateable {
         }
     }
 
+    public void registerProjectile(AbstractProjectile projectile){
+        projectiles.add(projectile);
+    }
+
+    public void registerTurret(AbstractTurret turret){
+        turrets.add(turret);
+    }
+
+    public void registerCreature(AbstractCreature creature){
+        creatures.add(creature);
+    }
+
+    /**
+     * To override!
+     * super(), then create new Objects (Creatures)
+     * @param delta
+     */
     public void update(int delta) {
-        for(AbstractProjectile projectile : projectiles){
+        for(Updateable projectile : projectiles){
             projectile.update(delta);
         }
-        projectiles.removeIf(proj -> proj.canDespawn());
+        projectiles.removeIf(AbstractProjectile::canDespawn);
+
+        for(Updateable creature : creatures){
+            creature.update(delta);
+        }
+        creatures.removeIf(AbstractCreature::canDespawn);
+
+        for(Updateable turret : turrets){
+            turret.update(delta);
+        }
+    }
+
+    /**
+     * First draw your map, then super() to draw the Objects
+     * @param graphics
+     */
+    @Override
+    public void drawMe(Graphics graphics) {
+        for(Drawable d : turrets){
+            d.drawMe(graphics);
+        }
+        for(Drawable d : creatures){
+            d.drawMe(graphics);
+        }
+        for(Drawable d : projectiles){
+            d.drawMe(graphics);
+        }
+
     }
 
     List<AbstractCreature> getAllCurrentCreatures(){

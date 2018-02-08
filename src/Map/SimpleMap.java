@@ -16,9 +16,7 @@ public class SimpleMap extends AbstractMap {
     //todo NEU
 
     AbstractField[][] fields;
-    AbstractCreature creature;
-    AbstractTurret turret;
-    SimpleSingletargetProjectile proj;
+
 
     public SimpleMap(int w, int h){
         super(w,h);
@@ -41,12 +39,13 @@ public class SimpleMap extends AbstractMap {
             lastOne = newOne;
         }
 
+        AbstractCreature creature = new Dot(0,0, (Path)fields[0][2]);
 
-        creature = new Dot(0,0, (Path)fields[0][2]);
+        registerCreature(creature);
 
-        turret = new RectangleTurret(300,30);
+        registerTurret(new RectangleTurret(300,30));
 
-        proj = new SimpleSingletargetProjectile(300,300,10,3,creature);
+        registerProjectile(new SimpleSingletargetProjectile(300,300,1,3,creature));
 
     }
 
@@ -58,14 +57,9 @@ public class SimpleMap extends AbstractMap {
                     current.drawMe(graphics);
             }
         }
-        creature.drawMe(graphics);
-        turret.drawMe(graphics);
-        proj.drawMe(graphics);
-    }
 
-    public void update(int delta) {
-        creature.update(delta);
-        proj.update(delta);
+        super.drawMe(graphics);
+
     }
 
     List<AbstractCreature> getAllCurrentCreatures() {
