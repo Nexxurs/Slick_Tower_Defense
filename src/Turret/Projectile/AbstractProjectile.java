@@ -35,6 +35,9 @@ public abstract class AbstractProjectile implements Drawable, Updateable {
      * @return True, if Projectile disappears, else False
      */
     public boolean onHit(AbstractCreature creature){
+        if(canDespawn()){
+            return true;
+        }
         creature.handleDMG(getDMG());
         shallDespawn();
         return true;
@@ -45,7 +48,6 @@ public abstract class AbstractProjectile implements Drawable, Updateable {
     }
 
     public void shallDespawn(){
-        System.out.println("DESPAWN");
         despawn = true;
     }
 

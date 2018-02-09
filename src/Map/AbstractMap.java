@@ -68,6 +68,15 @@ public abstract class AbstractMap implements Drawable, Updateable {
         }
         projectiles.removeIf(AbstractProjectile::canDespawn);
 
+        for(AbstractProjectile proj : projectiles){
+            for(AbstractCreature creature : creatures){
+                if(proj.getShape().intersects(creature.getShape())){
+                    proj.onHit(creature);
+                }
+            }
+        }
+
+
         for(Updateable creature : creatures){
             creature.update(delta);
         }
