@@ -5,7 +5,7 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class ShapeUtil {
 
-    private static final int SPEEDMULTIPLICATOR = 7;
+    private static final int SPEEDMULTIPLICATOR = 15;
 
     public static float getDistanceBetweenShapeCenters(Shape first, Shape second){
         float a = first.getCenterX()-second.getCenterX();

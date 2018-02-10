@@ -1,17 +1,21 @@
 package Turret;
 
+import Creatures.AbstractCreature;
+import Turret.Projectile.AbstractProjectile;
+import Turret.Projectile.SimpleSingletargetProjectile;
 import main.Global;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 
 public class RectangleTurret extends AbstractTurret {
 
     private Shape shape, range;
 
-    public RectangleTurret(int posX, int posY){
+    public RectangleTurret(float posX, float posY){
         Global global = Global.getInstance();
 
 
@@ -24,7 +28,11 @@ public class RectangleTurret extends AbstractTurret {
 
 
         this.shape = new Rectangle(x,y, width,height);
-        this.range = new Circle(posX+(global.getFieldSideLenght()/2), posY+(global.getFieldSideLenght()/2), 200);
+        this.range = new Circle(posX+(global.getFieldSideLenght()/2), posY+(global.getFieldSideLenght()/2), 100);
+    }
+
+    public RectangleTurret(Vector2f vec){
+        this(vec.x, vec.y);
     }
 
     protected Shape getShape() {
@@ -41,7 +49,13 @@ public class RectangleTurret extends AbstractTurret {
         graphics.fill(shape);
     }
 
-    public void update(int delta) {
+    @Override
+    protected AbstractProjectile createProjectile(AbstractCreature target) {
+        return new SimpleSingletargetProjectile(getShape().getCenterX(), getShape().getCenterY(), 5, 3, target);
+    }
 
+    @Override
+    protected int getCooldownInMillis() {
+        return 1000;
     }
 }

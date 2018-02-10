@@ -10,7 +10,7 @@ public class SimpleSingletargetProjectile extends AbstractProjectile {
     private float dmg, movespeed;
     private Shape shape;
 
-    public SimpleSingletargetProjectile(int posX, int posY, float dmg, float movespeed, AbstractCreature target){
+    public SimpleSingletargetProjectile(float posX, float posY, float dmg, float movespeed, AbstractCreature target){
         super(target);
         this.dmg = dmg;
         this.movespeed = movespeed;

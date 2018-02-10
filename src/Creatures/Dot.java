@@ -9,8 +9,11 @@ import org.newdawn.slick.geom.Shape;
 
 public class Dot extends AbstractCreature {
 
-    public Dot(int posX, int posY, Path startPath) {
+    public Dot(float posX, float posY, Path startPath) {
         super(createShape(posX, posY),startPath, 10);
+    }
+    public Dot(Path startPath) {
+        this(startPath.getShape().getX(), startPath.getShape().getY(), startPath);
     }
 
     protected float getMovespeed() {
@@ -26,7 +29,7 @@ public class Dot extends AbstractCreature {
     }
 
     //Super must be the first call in constructor -.-
-    private static Shape createShape(int posX, int posY){
+    private static Shape createShape(float posX, float posY){
         Global global = Global.getInstance();
         int offset = global.getFieldSideLenght()/2;
         return new Circle(posX+offset,posY+offset,10);

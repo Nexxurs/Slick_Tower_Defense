@@ -24,10 +24,6 @@ public abstract class AbstractProjectile implements Drawable, Updateable {
         if(canDespawn()) return;
 
         ShapeUtil.moveShapeToCenter(getShape(), target.getShape(), getMovespeed(), delta);
-
-        if(getShape().intersects(target.getShape())){
-            onHit(target);
-        }
     }
 
     /**

@@ -3,19 +3,21 @@ package Map;
 import Creatures.AbstractCreature;
 import Creatures.Dot;
 import Map.Field.AbstractField;
+import Map.Field.GrassField;
 import Map.Field.Path;
-import Turret.AbstractTurret;
-import Turret.Projectile.SimpleSingletargetProjectile;
 import Turret.RectangleTurret;
 import main.Global;
 import org.newdawn.slick.Graphics;
-
-import java.util.List;
+import org.newdawn.slick.geom.Vector2f;
+import util.MapUtil;
 
 public class SimpleMap extends AbstractMap {
     //todo NEU
 
     AbstractField[][] fields;
+    Path firstPath = null;
+    int spawnTimer = 0;
+    int spawnCD = 1000;
 
 
     public SimpleMap(int w, int h){
@@ -27,26 +29,46 @@ public class SimpleMap extends AbstractMap {
         int numFieldsH = h/global.getFieldSideLenght();
 
         this.fields = new AbstractField[numFieldsW][numFieldsH];
-
         Path lastOne = null;
 
-        for (int i = 0; i < fields.length; i++) {
-            Path newOne = new Path(i*global.getFieldSideLenght(), 2*global.getFieldSideLenght());
-            if(lastOne != null){
-                lastOne.setNext(newOne);
+        int currX = 0;
+        int currY = 2;
+
+
+        for (int i = 0; i < 35; i++) {
+            Vector2f vec = MapUtil.fieldPosToVector(currX, currY);
+            Path field = new Path(vec);
+            if(firstPath == null){
+                firstPath = field;
             }
-            fields[i][2] = newOne;
-            lastOne = newOne;
+
+            if(lastOne != null)
+                lastOne.setNext(field);
+            fields[currX][currY] = field;
+            lastOne = field;
+            if((i/5) % 2 == 0){
+                currX++;
+            } else if((i/5) % 4 == 1) {
+                currY++;
+            } else {
+                currY--;
+            }
         }
 
-        AbstractCreature creature = new Dot(0,0, (Path)fields[0][2]);
+        for (int i = 0; i < fields.length; i++) {
+            for (int j = 0; j < fields[i].length; j++) {
+                if(fields[i][j] == null){
+                    fields[i][j] = new GrassField(MapUtil.fieldPosToVector(i,j));
+                }
+            }
+        }
 
+        registerTurret(new RectangleTurret(MapUtil.fieldPosToVector(6,6)));
+        registerTurret(new RectangleTurret(MapUtil.fieldPosToVector(11,3)));
+
+
+        AbstractCreature creature = new Dot(0,0, firstPath);
         registerCreature(creature);
-
-        registerTurret(new RectangleTurret(300,30));
-
-        registerProjectile(new SimpleSingletargetProjectile(300,300,1,3,creature));
-
     }
 
     public void drawMe(Graphics graphics) {
@@ -59,11 +81,21 @@ public class SimpleMap extends AbstractMap {
         }
 
         super.drawMe(graphics);
-
     }
 
-    List<AbstractCreature> getAllCurrentCreatures() {
-        return null;
-        //todo
+    @Override
+    public void update(int delta) {
+        super.update(delta);
+
+        spawnTimer += delta;
+
+        if(spawnCD < spawnTimer){
+            Global global = Global.getInstance();
+            AbstractMap map = global.getCurrentMap();
+
+            map.registerCreature(new Dot(firstPath));
+            spawnTimer = 0;
+        }
+
     }
 }

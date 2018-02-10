@@ -17,7 +17,9 @@ public class Game extends BasicGame {
 
 
     public void init(GameContainer gameContainer) throws SlickException {
+        Global global = Global.getInstance();
         map = new SimpleMap(gameContainer.getWidth(), gameContainer.getHeight());
+        global.setCurrentMap(map);
     }
 
     public void update(GameContainer gameContainer, int i) throws SlickException {

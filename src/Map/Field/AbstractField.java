@@ -9,10 +9,10 @@ import org.newdawn.slick.geom.Shape;
 
 public abstract class AbstractField implements Drawable {
 
-    protected int posX, posY;
+    protected float posX, posY;
     private Rectangle rect;
 
-    public AbstractField(int posX, int posY){
+    public AbstractField(float posX, float posY){
         this.posX = posX;
         this.posY = posY;
     }

@@ -1,6 +1,7 @@
 package Map.Field;
 
 import org.newdawn.slick.Color;
+import org.newdawn.slick.geom.Vector2f;
 
 
 public class Path extends AbstractField {
@@ -13,6 +14,10 @@ public class Path extends AbstractField {
     public Path(int posX, int posY, Path next){
         super(posX, posY);
         this.next = next;
+    }
+
+    public Path(Vector2f vec){
+        super(vec.x, vec.y);
     }
 
     protected Color getFillColor() {
