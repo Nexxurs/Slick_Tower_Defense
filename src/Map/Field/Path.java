@@ -7,17 +7,13 @@ import org.newdawn.slick.geom.Vector2f;
 public class Path extends AbstractField {
     Path next;
 
-    public Path(int posX, int posY){
-        this(posX, posY, null);
+    public Path(int fPosX, int fPosY){
+        this(fPosX, fPosY, null);
     }
 
-    public Path(int posX, int posY, Path next){
-        super(posX, posY);
+    public Path(int fPosX, int fPosY, Path next){
+        super(fPosX, fPosY);
         this.next = next;
-    }
-
-    public Path(Vector2f vec){
-        super(vec.x, vec.y);
     }
 
     protected Color getFillColor() {

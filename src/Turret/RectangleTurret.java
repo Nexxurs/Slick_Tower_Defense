@@ -10,29 +10,37 @@ import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
+import util.MapUtil;
 
 public class RectangleTurret extends AbstractTurret {
 
     private Shape shape, range;
+    private int fPosX, fPosY;
 
-    public RectangleTurret(float posX, float posY){
+    public RectangleTurret(int fPosX, int fPosY){
+
+        this.fPosX = fPosX;
+        this.fPosY = fPosY;
+
         Global global = Global.getInstance();
 
 
         float width = global.getFieldSideLenght()*0.6f;
         float height = global.getFieldSideLenght()*0.9f;
 
-        float x = posX + ((global.getFieldSideLenght() - width)/2);
+        /*float x = posX + ((global.getFieldSideLenght() - width)/2);
         float y = posY + ((global.getFieldSideLenght() - height)/2);
-
-
 
         this.shape = new Rectangle(x,y, width,height);
         this.range = new Circle(posX+(global.getFieldSideLenght()/2), posY+(global.getFieldSideLenght()/2), 100);
-    }
+        */
 
-    public RectangleTurret(Vector2f vec){
-        this(vec.x, vec.y);
+        Vector2f centerVec = MapUtil.fieldPosToVectorCenter(fPosX, fPosY);
+        this.shape = new Rectangle(0,0, width, height);
+        this.shape.setCenterX(centerVec.x);
+        this.shape.setCenterY(centerVec.y);
+
+        this.range = new Circle(centerVec.x, centerVec.y, 100);
     }
 
     protected Shape getShape() {
@@ -51,7 +59,7 @@ public class RectangleTurret extends AbstractTurret {
 
     @Override
     protected AbstractProjectile createProjectile(AbstractCreature target) {
-        return new SimpleSingletargetProjectile(getShape().getCenterX(), getShape().getCenterY(), 5, 3, target);
+        return new SimpleSingletargetProjectile(fPosX, fPosY, 5, 3, target);
     }
 
     @Override

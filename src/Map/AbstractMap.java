@@ -63,10 +63,14 @@ public abstract class AbstractMap implements Drawable, Updateable {
      * @param delta
      */
     public void update(int delta) {
+
+        for(Updateable creature : creatures){
+            creature.update(delta);
+        }
+
         for(Updateable projectile : projectiles){
             projectile.update(delta);
         }
-        projectiles.removeIf(AbstractProjectile::canDespawn);
 
         for(AbstractProjectile proj : projectiles){
             for(AbstractCreature creature : creatures){
@@ -75,11 +79,7 @@ public abstract class AbstractMap implements Drawable, Updateable {
                 }
             }
         }
-
-
-        for(Updateable creature : creatures){
-            creature.update(delta);
-        }
+        projectiles.removeIf(AbstractProjectile::canDespawn);
         creatures.removeIf(AbstractCreature::canDespawn);
 
         for(Updateable turret : turrets){
@@ -105,7 +105,7 @@ public abstract class AbstractMap implements Drawable, Updateable {
 
     }
 
-    List<AbstractCreature> getAllCurrentCreatures(){
-        return new LinkedList<AbstractCreature>(creatures);
+    public List<AbstractCreature> getAllCurrentCreatures(){
+        return new LinkedList<>(creatures);
     }
 }

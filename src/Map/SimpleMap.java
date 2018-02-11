@@ -36,8 +36,7 @@ public class SimpleMap extends AbstractMap {
 
 
         for (int i = 0; i < 35; i++) {
-            Vector2f vec = MapUtil.fieldPosToVector(currX, currY);
-            Path field = new Path(vec);
+            Path field = new Path(currX, currY);
             if(firstPath == null){
                 firstPath = field;
             }
@@ -58,13 +57,13 @@ public class SimpleMap extends AbstractMap {
         for (int i = 0; i < fields.length; i++) {
             for (int j = 0; j < fields[i].length; j++) {
                 if(fields[i][j] == null){
-                    fields[i][j] = new GrassField(MapUtil.fieldPosToVector(i,j));
+                    fields[i][j] = new GrassField(i,j);
                 }
             }
         }
 
-        registerTurret(new RectangleTurret(MapUtil.fieldPosToVector(6,6)));
-        registerTurret(new RectangleTurret(MapUtil.fieldPosToVector(11,3)));
+        registerTurret(new RectangleTurret(6,6));
+        registerTurret(new RectangleTurret(11,3));
 
 
         AbstractCreature creature = new Dot(0,0, firstPath);

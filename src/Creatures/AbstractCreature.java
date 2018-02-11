@@ -10,12 +10,10 @@ import util.ShapeUtil;
 public abstract class AbstractCreature implements Drawable, Updateable {
 
     private float health;
-    protected Shape shape;
     protected boolean despawn;
     private Path nextPath;
 
-    public AbstractCreature(Shape shape, Path startPath, float health){
-        this.shape = shape;
+    public AbstractCreature(Path startPath, float health){
         this.health = health;
         this.despawn = false;
         nextPath = startPath;
@@ -30,9 +28,7 @@ public abstract class AbstractCreature implements Drawable, Updateable {
         }
     }
 
-    public Shape getShape(){
-        return shape;
-    }
+    public abstract Shape getShape();
 
     public void update(int delta) {
         if(despawn) return;
@@ -40,9 +36,9 @@ public abstract class AbstractCreature implements Drawable, Updateable {
             despawn = true;
         }
 
-        float startDistance = ShapeUtil.getDistanceBetweenShapeCenters(shape, nextPath.getShape());
+        float startDistance = ShapeUtil.getDistanceBetweenShapeCenters(getShape(), nextPath.getShape());
         Vector2f startLocation = new Vector2f(getShape().getLocation());
-        ShapeUtil.moveShapeToCenter(shape, nextPath.getShape(), getMovespeed(), delta);
+        ShapeUtil.moveShapeToCenter(getShape(), nextPath.getShape(), getMovespeed(), delta);
 
         Vector2f endLocation = new Vector2f(getShape().getLocation());
 
@@ -58,22 +54,5 @@ public abstract class AbstractCreature implements Drawable, Updateable {
 
     public boolean canDespawn() {
         return despawn;
-    }
-
-    private static float pythagoras(float a, float b){
-        return (float) Math.abs(Math.sqrt((a*a)+(b*b)));
-    }
-
-    private static float[] getMovementVector(Shape me, Shape destination){
-        float destX = destination.getCenterX() - me.getCenterX();
-        float destY = destination.getCenterY() - me.getCenterY();
-
-        if(destX < 0) destX = -1;
-        else if(destX > 0) destX = 1;
-
-        if(destY < 0) destY = -1;
-        else if(destY > 0) destY = 1;
-
-        return new float[]{destX, destY};
     }
 }

@@ -5,12 +5,8 @@ import org.newdawn.slick.geom.Vector2f;
 
 public class GrassField extends AbstractField {
 
-    public GrassField(float posX, float posY){
-        super(posX, posY);
-    }
-
-    public GrassField(Vector2f vec){
-        super(vec.x, vec.y);
+    public GrassField(int fPosX, int fPosY){
+        super(fPosX, fPosY);
     }
 
     @Override
