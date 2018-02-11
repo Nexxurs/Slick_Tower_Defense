@@ -6,9 +6,11 @@ import Turret.Projectile.AbstractProjectile;
 import interfaces.Drawable;
 import interfaces.Updateable;
 import Singletons.Global;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
+import util.MouseUtil;
 
 import java.util.List;
 
@@ -22,6 +24,11 @@ public abstract class AbstractTurret implements Drawable, Updateable {
     }
 
     public void drawMe(Graphics graphics) {
+        Shape mouse = MouseUtil.createMouseShape();
+        if(mouse.intersects(getShape())){
+            graphics.setColor(Color.yellow);
+            graphics.draw(getShape());
+        }
         graphics.setColor(new Color(211,236,214,75));
         graphics.draw(getRange());
     }

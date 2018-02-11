@@ -4,10 +4,7 @@ import Map.AbstractMap;
 import Map.SimpleMap;
 import SideElement.Header;
 import Singletons.Global;
-import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 public class Game extends BasicGame {
     AbstractMap map;
@@ -25,6 +22,7 @@ public class Game extends BasicGame {
         header = new Header(gameContainer.getWidth(), Main.HEADER_HEIGHT);
         map = new SimpleMap(gameContainer.getWidth(), gameContainer.getHeight() - header.getHeight());
         global.setCurrentMap(map);
+        global.setGameContainer(gameContainer);
     }
 
     public void update(GameContainer gameContainer, int i) throws SlickException {

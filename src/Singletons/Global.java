@@ -3,6 +3,7 @@ package Singletons;
 import Map.AbstractMap;
 import SideElement.Header;
 import main.Main;
+import org.newdawn.slick.GameContainer;
 
 public class Global {
     private static Global ourInstance = new Global();
@@ -12,6 +13,7 @@ public class Global {
     }
     private AbstractMap map;
     private Header header;
+    private GameContainer gameContainer;
 
     private Global() {}
 
@@ -41,5 +43,13 @@ public class Global {
 
     public void setHeader(Header header) {
         this.header = header;
+    }
+
+    public GameContainer getGameContainer() {
+        return gameContainer;
+    }
+
+    public void setGameContainer(GameContainer gameContainer) {
+        this.gameContainer = gameContainer;
     }
 }

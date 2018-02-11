@@ -28,13 +28,6 @@ public class RectangleTurret extends AbstractTurret {
         float width = global.getFieldSideLenght()*0.6f;
         float height = global.getFieldSideLenght()*0.9f;
 
-        /*float x = posX + ((global.getFieldSideLenght() - width)/2);
-        float y = posY + ((global.getFieldSideLenght() - height)/2);
-
-        this.shape = new Rectangle(x,y, width,height);
-        this.range = new Circle(posX+(global.getFieldSideLenght()/2), posY+(global.getFieldSideLenght()/2), 100);
-        */
-
         Vector2f centerVec = MapUtil.fieldPosToVectorCenter(fPosX, fPosY);
         this.shape = new Rectangle(0,0, width, height);
         this.shape.setCenterX(centerVec.x);
