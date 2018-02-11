@@ -16,7 +16,8 @@ import java.util.List;
 
 public abstract class AbstractTurret implements Drawable, Updateable {
 
-    int cdTimer = 0;
+    private int cdTimer = 0;
+    private Global global = Global.getInstance();
 
     protected List<AbstractCreature> creaturesInRange(){
         return null;
@@ -41,9 +42,9 @@ public abstract class AbstractTurret implements Drawable, Updateable {
     @Override
     public void update(int delta) {
         cdTimer += delta;
-        int cd = getCooldownInMillis();
-        if(cdTimer > cd){
-            Global global = Global.getInstance();
+        int cd = getCooldownInMillis() / global.getSpeedMultiplicator();
+        int timer = cdTimer / global.getSpeedMultiplicator();
+        if(timer > cd){
             AbstractMap map = global.getCurrentMap();
             List<AbstractCreature> creatures = map.getAllCurrentCreatures();
 

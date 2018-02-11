@@ -16,12 +16,12 @@ public class SimpleMap extends AbstractMap {
     private Path firstPath = null;
     private int spawnTimer = spawnCD;
 
+    private Global global = Global.getInstance();
+
 
 
     public SimpleMap(int w, int h){
         super(w,h);
-
-        Global global = Global.getInstance();
 
         this.fields = new AbstractField[global.getNumFieldsWidth()][global.getNumFieldsHeight()];
         Path lastOne = null;
@@ -79,7 +79,10 @@ public class SimpleMap extends AbstractMap {
 
         spawnTimer += delta;
 
-        if(spawnCD < spawnTimer){
+        int cd = spawnCD / global.getSpeedMultiplicator();
+        int timer = spawnTimer / global.getSpeedMultiplicator();
+
+        if(cd < timer){
             Global global = Global.getInstance();
             AbstractMap map = global.getCurrentMap();
 

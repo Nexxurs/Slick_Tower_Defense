@@ -4,6 +4,7 @@ import Creatures.AbstractCreature;
 import interfaces.Drawable;
 import interfaces.Updateable;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 import util.ShapeUtil;
 
 public abstract class AbstractProjectile implements Drawable, Updateable {
@@ -23,7 +24,19 @@ public abstract class AbstractProjectile implements Drawable, Updateable {
     public void update(int delta) {
         if(canDespawn()) return;
 
+        //ShapeUtil.moveShapeToCenter(getShape(), target.getShape(), getMovespeed(), delta);
+
+        float startDistance = ShapeUtil.getDistanceBetweenShapeCenters(getShape(), target.getShape());
+        Vector2f startLocation = new Vector2f(getShape().getLocation());
         ShapeUtil.moveShapeToCenter(getShape(), target.getShape(), getMovespeed(), delta);
+
+        Vector2f endLocation = new Vector2f(getShape().getLocation());
+
+        float moveDistance = startLocation.distance(endLocation);
+
+        if(startDistance <= moveDistance){
+            despawn = true;
+        }
     }
 
     /**
