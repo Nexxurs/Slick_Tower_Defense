@@ -1,23 +1,21 @@
 package Map;
 
-import Creatures.AbstractCreature;
 import Creatures.Dot;
 import Map.Field.AbstractField;
 import Map.Field.GrassField;
 import Map.Field.Path;
 import Turret.RectangleTurret;
-import main.Global;
+import Singletons.Global;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.geom.Vector2f;
-import util.MapUtil;
+
 
 public class SimpleMap extends AbstractMap {
-    //todo NEU
+    private static final int spawnCD = 1000;
 
-    AbstractField[][] fields;
-    Path firstPath = null;
-    int spawnTimer = 0;
-    int spawnCD = 1000;
+    private AbstractField[][] fields;
+    private Path firstPath = null;
+    private int spawnTimer = spawnCD;
+
 
 
     public SimpleMap(int w, int h){
@@ -25,10 +23,7 @@ public class SimpleMap extends AbstractMap {
 
         Global global = Global.getInstance();
 
-        int numFieldsW = w/global.getFieldSideLenght();
-        int numFieldsH = h/global.getFieldSideLenght();
-
-        this.fields = new AbstractField[numFieldsW][numFieldsH];
+        this.fields = new AbstractField[global.getNumFieldsWidth()][global.getNumFieldsHeight()];
         Path lastOne = null;
 
         int currX = 0;
@@ -64,10 +59,6 @@ public class SimpleMap extends AbstractMap {
 
         registerTurret(new RectangleTurret(6,6));
         registerTurret(new RectangleTurret(11,3));
-
-
-        AbstractCreature creature = new Dot(0,0, firstPath);
-        registerCreature(creature);
     }
 
     public void drawMe(Graphics graphics) {

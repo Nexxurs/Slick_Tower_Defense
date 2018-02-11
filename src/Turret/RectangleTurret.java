@@ -3,7 +3,7 @@ package Turret;
 import Creatures.AbstractCreature;
 import Turret.Projectile.AbstractProjectile;
 import Turret.Projectile.SimpleSingletargetProjectile;
-import main.Global;
+import Singletons.Global;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;

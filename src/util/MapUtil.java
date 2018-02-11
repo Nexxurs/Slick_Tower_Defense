@@ -1,19 +1,27 @@
 package util;
 
-import main.Global;
+import Singletons.Global;
+import main.Main;
 import org.newdawn.slick.geom.Vector2f;
 
 public class MapUtil {
 
-    static Global global = Global.getInstance();
+    private static Global global = Global.getInstance();
 
     public static Vector2f fieldPosToVector(int x, int y){
-        return new Vector2f(global.getFieldSideLenght()*x, global.getFieldSideLenght()*y);
+        float posX = global.getFieldSideLenght()*x ;
+        float posY = global.getFieldSideLenght()*y + Main.HEADER_HEIGHT;
+
+        return new Vector2f(posX, posY);
     }
 
     public static Vector2f fieldPosToVectorCenter(int x, int y){
         int offset = global.getFieldSideLenght()/2;
-        return new Vector2f(global.getFieldSideLenght()*x+offset, global.getFieldSideLenght()*y+offset);
+        Vector2f vec = fieldPosToVector(x,y);
+        vec.x+=offset;
+        vec.y+=offset;
+
+        return vec;
     }
 
     public static int posToFieldPos(float x){

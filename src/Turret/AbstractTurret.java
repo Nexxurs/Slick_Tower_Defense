@@ -5,7 +5,7 @@ import Map.AbstractMap;
 import Turret.Projectile.AbstractProjectile;
 import interfaces.Drawable;
 import interfaces.Updateable;
-import main.Global;
+import Singletons.Global;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;

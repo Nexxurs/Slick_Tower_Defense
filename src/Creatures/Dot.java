@@ -1,7 +1,6 @@
 package Creatures;
 
 import Map.Field.Path;
-import main.Global;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;

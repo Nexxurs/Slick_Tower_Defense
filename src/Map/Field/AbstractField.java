@@ -1,7 +1,7 @@
 package Map.Field;
 
 import interfaces.Drawable;
-import main.Global;
+import Singletons.Global;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
