@@ -1,11 +1,12 @@
 package util;
 
+import Singletons.Global;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.geom.Vector2f;
 
 public class ShapeUtil {
 
-    private static final int SPEEDMULTIPLICATOR = 15;
+    private static Global global = Global.getInstance();
 
     public static float getDistanceBetweenShapeCenters(Shape first, Shape second){
         float a = first.getCenterX()-second.getCenterX();
@@ -28,7 +29,7 @@ public class ShapeUtil {
         vector = vector.getNormal();
 
         //ms*100/delta
-        vector = vector.scale(movespeed*delta/100*SPEEDMULTIPLICATOR);
+        vector = vector.scale(movespeed*delta/100* global.getSpeedMultiplicator());
         shape.setLocation(shape.getLocation().add(vector));
     }
 

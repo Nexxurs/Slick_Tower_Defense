@@ -8,14 +8,19 @@ import org.newdawn.slick.GameContainer;
 public class Global {
     private static Global ourInstance = new Global();
 
+    public final int DEFAULT_SPEED_MULTIPLICATOR = 10;
+
     public static Global getInstance() {
         return ourInstance;
     }
     private AbstractMap map;
     private Header header;
     private GameContainer gameContainer;
+    private int speedMultiplicator;
 
-    private Global() {}
+    private Global() {
+        speedMultiplicator = DEFAULT_SPEED_MULTIPLICATOR;
+    }
 
     public int getFieldSideLenght() {
         return Main.SIDELENGTH_FIELD;
@@ -51,5 +56,13 @@ public class Global {
 
     public void setGameContainer(GameContainer gameContainer) {
         this.gameContainer = gameContainer;
+    }
+
+    public int getSpeedMultiplicator() {
+        return speedMultiplicator;
+    }
+
+    public void setSpeedMultiplicator(int speedMultiplicator) {
+        this.speedMultiplicator = speedMultiplicator;
     }
 }

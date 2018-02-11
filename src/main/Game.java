@@ -21,16 +21,18 @@ public class Game extends BasicGame {
 
         header = new Header(gameContainer.getWidth(), Main.HEADER_HEIGHT);
         map = new SimpleMap(gameContainer.getWidth(), gameContainer.getHeight() - header.getHeight());
+
         global.setCurrentMap(map);
         global.setGameContainer(gameContainer);
     }
 
     public void update(GameContainer gameContainer, int i) throws SlickException {
         map.update(i);
+        header.update(i);
     }
 
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        header.drawMe(graphics);
         map.drawMe(graphics);
+        header.drawMe(graphics);
     }
 }
