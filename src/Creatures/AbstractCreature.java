@@ -1,6 +1,7 @@
 package Creatures;
 
 import Map.Field.Path;
+import Singletons.Bank;
 import interfaces.Drawable;
 import interfaces.Updateable;
 import org.newdawn.slick.geom.Shape;
@@ -24,11 +25,14 @@ public abstract class AbstractCreature implements Drawable, Updateable {
     public void handleDMG(float dmg){
         health -= dmg;
         if(health <= 0){
+            Bank.getInstance().addMoney(getLoot());
             despawn = true;
         }
     }
 
     public abstract Shape getShape();
+
+    public abstract float getLoot();
 
     public void update(int delta) {
         if(despawn) return;

@@ -27,6 +27,11 @@ public class Dot extends AbstractCreature {
     }
 
     @Override
+    public float getLoot() {
+        return 10;
+    }
+
+    @Override
     public Shape getShape() {
         return shape;
     }
