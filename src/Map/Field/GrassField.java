@@ -1,11 +1,29 @@
 package Map.Field;
 
+import Singletons.Global;
+import Turret.AbstractTurret;
 import org.newdawn.slick.Color;
+import util.MapUtil;
 
-public class GrassField extends AbstractField {
+public class GrassField extends ClickableField {
 
     public GrassField(int fPosX, int fPosY){
         super(fPosX, fPosY);
+    }
+
+    @Override
+    public void onClick() {
+
+        Global global = Global.getInstance();
+        if (global.getTurretOfMouse() != null){
+            AbstractTurret turret = global.getTurretOfMouse().copyTurret();
+            turret.getShape().setLocation(MapUtil.fieldPosToVector(fPosX, fPosY));
+            global.getCurrentMap().registerTurret(turret);
+
+            global.getTurretOfMouse().followMouse(false);
+            global.setTurretOfMouse(null);
+        }
+
     }
 
     @Override
