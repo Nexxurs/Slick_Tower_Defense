@@ -19,7 +19,7 @@ public class Main {
         BasicGame game = new Game();
         AppGameContainer container = new AppGameContainer(game);
         container.setDisplayMode(NUM_FIELDS_WIDTH * SIDELENGTH_FIELD,
-                NUM_FIELDS_HEIGHT * SIDELENGTH_FIELD + HEADER_HEIGHT,
+                NUM_FIELDS_HEIGHT * SIDELENGTH_FIELD + HEADER_HEIGHT*2,
                 false);
         container.setVSync(true);
         container.setShowFPS(false);
