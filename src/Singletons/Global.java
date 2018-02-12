@@ -8,7 +8,7 @@ import org.newdawn.slick.GameContainer;
 public class Global {
     private static Global ourInstance = new Global();
 
-    public final int DEFAULT_SPEED_MULTIPLICATOR = 10;
+    public final int DEFAULT_SPEED_MULTIPLICATOR = 1;
 
     public static Global getInstance() {
         return ourInstance;

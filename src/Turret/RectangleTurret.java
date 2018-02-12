@@ -52,7 +52,7 @@ public class RectangleTurret extends AbstractTurret {
 
     @Override
     protected AbstractProjectile createProjectile(AbstractCreature target) {
-        return new SimpleSingletargetProjectile(fPosX, fPosY, 5, 3, target);
+        return new SimpleSingletargetProjectile(fPosX, fPosY, 5, 30, target);
     }
 
     @Override

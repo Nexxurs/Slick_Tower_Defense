@@ -23,7 +23,7 @@ public class Dot extends AbstractCreature {
     }
 
     protected float getMovespeed() {
-        return 1;
+        return 10;
     }
 
     @Override

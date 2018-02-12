@@ -73,22 +73,17 @@ public class SimpleMap extends AbstractMap {
         super.drawMe(graphics);
     }
 
+    private int oldSM=global.getSpeedMultiplicator();
+
     @Override
     public void update(int delta) {
         super.update(delta);
 
-        spawnTimer += delta;
-
-        int cd = spawnCD / global.getSpeedMultiplicator();
-        int timer = spawnTimer / global.getSpeedMultiplicator();
-
-        if(cd < timer){
-            Global global = Global.getInstance();
+        spawnTimer += (delta * global.getSpeedMultiplicator());
+        if(spawnCD <= spawnTimer){
             AbstractMap map = global.getCurrentMap();
-
             map.registerCreature(new Dot(firstPath));
             spawnTimer = 0;
         }
-
     }
 }

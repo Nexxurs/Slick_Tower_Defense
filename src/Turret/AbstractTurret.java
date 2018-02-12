@@ -41,10 +41,8 @@ public abstract class AbstractTurret implements Drawable, Updateable {
 
     @Override
     public void update(int delta) {
-        cdTimer += delta;
-        int cd = getCooldownInMillis() / global.getSpeedMultiplicator();
-        int timer = cdTimer / global.getSpeedMultiplicator();
-        if(timer > cd){
+        cdTimer += delta*global.getSpeedMultiplicator();
+        if(cdTimer > getCooldownInMillis()){
             AbstractMap map = global.getCurrentMap();
             List<AbstractCreature> creatures = map.getAllCurrentCreatures();
 

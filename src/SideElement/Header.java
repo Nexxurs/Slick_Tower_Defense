@@ -41,14 +41,6 @@ public class Header implements Drawable, Updateable {
         buttons.add(speedupBtn);
     }
 
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
     @Override
     public void drawMe(Graphics graphics) {
         graphics.setColor(new Color(145,107,96));
