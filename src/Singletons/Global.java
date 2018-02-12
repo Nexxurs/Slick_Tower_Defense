@@ -2,6 +2,7 @@ package Singletons;
 
 import Map.AbstractMap;
 import SideElement.Header;
+import SideElement.TurretPositionWrapper;
 import main.Main;
 import org.newdawn.slick.GameContainer;
 
@@ -17,6 +18,7 @@ public class Global {
     private Header header;
     private GameContainer gameContainer;
     private int speedMultiplicator;
+    private TurretPositionWrapper turretOfMouse;
 
     private Global() {
         speedMultiplicator = DEFAULT_SPEED_MULTIPLICATOR;
@@ -64,5 +66,13 @@ public class Global {
 
     public void setSpeedMultiplicator(int speedMultiplicator) {
         this.speedMultiplicator = speedMultiplicator;
+    }
+
+    public TurretPositionWrapper getTurretOfMouse() {
+        return turretOfMouse;
+    }
+
+    public void setTurretOfMouse(TurretPositionWrapper turretOfMouse) {
+        this.turretOfMouse = turretOfMouse;
     }
 }

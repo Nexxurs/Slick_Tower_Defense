@@ -36,19 +36,25 @@ public class RectangleTurret extends AbstractTurret {
         this.range = new Circle(centerVec.x, centerVec.y, 100);
     }
 
-    protected Shape getShape() {
+    @Override
+    public Color getColor() {
+        return Color.blue;
+    }
+
+    @Override
+    public AbstractTurret copy() {
+        RectangleTurret t = new RectangleTurret(fPosX,fPosY);
+        return t;
+    }
+
+    public Shape getShape() {
         return shape;
     }
 
-    protected Shape getRange() {
+    public Shape getRange() {
         return range;
     }
 
-    public void drawMe(Graphics graphics) {
-        super.drawMe(graphics);
-        graphics.setColor(Color.blue);
-        graphics.fill(shape);
-    }
 
     @Override
     protected AbstractProjectile createProjectile(AbstractCreature target) {

@@ -3,6 +3,7 @@ package Button;
 import Singletons.Global;
 import interfaces.Drawable;
 import interfaces.Updateable;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -32,7 +33,7 @@ public abstract class AbstractButton implements Drawable, Updateable {
     public void drawMe(Graphics graphics) {
         Shape mouse = MouseUtil.createMouseShape();
         if(mouse.intersects(getShape())){
-            if(Global.getInstance().getGameContainer().getInput().isMousePressed(0)){
+            if(MouseUtil.isPrimaryMouseButtonClicked()){
                 onClick(0);
                 borderDuration = CLICKED_BORDER_DURATION;
             }

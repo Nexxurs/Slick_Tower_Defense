@@ -19,11 +19,6 @@ public abstract class AbstractTurret implements Drawable, Updateable {
     private int cdTimer = 0;
     private Global global = Global.getInstance();
 
-    protected List<AbstractCreature> creaturesInRange(){
-        return null;
-        //todo
-    }
-
     public void drawMe(Graphics graphics) {
         Shape mouse = MouseUtil.createMouseShape();
         if(mouse.intersects(getShape())){
@@ -32,12 +27,18 @@ public abstract class AbstractTurret implements Drawable, Updateable {
         }
         graphics.setColor(new Color(211,236,214,75));
         graphics.draw(getRange());
+
+        graphics.setColor(getColor());
+        graphics.fill(getShape());
     }
 
-    protected abstract Shape getShape();
-    protected abstract Shape getRange();
+    public abstract Shape getShape();
+    public abstract Shape getRange();
+    public abstract Color getColor();
     protected abstract AbstractProjectile createProjectile(AbstractCreature target);
     protected abstract int getCooldownInMillis();
+
+    public abstract AbstractTurret copy();
 
     @Override
     public void update(int delta) {

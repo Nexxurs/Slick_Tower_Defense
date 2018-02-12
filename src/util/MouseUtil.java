@@ -12,4 +12,10 @@ public class MouseUtil {
         Input input = global.getGameContainer().getInput();
         return new Circle(input.getMouseX(), input.getMouseY(), 1);
     }
+
+    public static boolean isPrimaryMouseButtonClicked(){
+        Input input = global.getGameContainer().getInput();
+        return input.isMousePressed(0);
+    }
+
 }
