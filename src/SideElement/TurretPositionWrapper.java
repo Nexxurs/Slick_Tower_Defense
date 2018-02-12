@@ -69,6 +69,11 @@ public class TurretPositionWrapper extends AbstractTurret {
     }
 
     @Override
+    public void setFPos(int fPosX, int fPosY) {
+        //do nothing
+    }
+
+    @Override
     protected int getCooldownInMillis() {
         return 0;
     }

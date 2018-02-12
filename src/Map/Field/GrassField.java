@@ -17,7 +17,9 @@ public class GrassField extends ClickableField {
         Global global = Global.getInstance();
         if (global.getTurretOfMouse() != null){
             AbstractTurret turret = global.getTurretOfMouse().copyTurret();
-            turret.getShape().setLocation(MapUtil.fieldPosToVector(fPosX, fPosY));
+
+            turret.setFPos(fPosX, fPosY);
+
             global.getCurrentMap().registerTurret(turret);
 
             global.getTurretOfMouse().followMouse(false);

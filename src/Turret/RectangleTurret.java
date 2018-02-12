@@ -17,23 +17,18 @@ public class RectangleTurret extends AbstractTurret {
     private Shape shape, range;
     private int fPosX, fPosY;
 
+    private Global global;
+
     public RectangleTurret(int fPosX, int fPosY){
-
-        this.fPosX = fPosX;
-        this.fPosY = fPosY;
-
-        Global global = Global.getInstance();
-
-
+        global = Global.getInstance();
         float width = global.getFieldSideLenght()*0.6f;
         float height = global.getFieldSideLenght()*0.9f;
 
-        Vector2f centerVec = MapUtil.fieldPosToVectorCenter(fPosX, fPosY);
         this.shape = new Rectangle(0,0, width, height);
-        this.shape.setCenterX(centerVec.x);
-        this.shape.setCenterY(centerVec.y);
+        this.range = new Circle(0, 0, 100);
 
-        this.range = new Circle(centerVec.x, centerVec.y, 100);
+        setFPos(fPosX, fPosY);
+
     }
 
     @Override
@@ -45,6 +40,20 @@ public class RectangleTurret extends AbstractTurret {
     public AbstractTurret copy() {
         RectangleTurret t = new RectangleTurret(fPosX,fPosY);
         return t;
+    }
+
+    @Override
+    public void setFPos(int fPosX, int fPosY) {
+        this.fPosX = fPosX;
+        this.fPosY = fPosY;
+
+        Vector2f centerVec = MapUtil.fieldPosToVectorCenter(fPosX, fPosY);
+
+        this.shape.setCenterX(centerVec.x);
+        this.shape.setCenterY(centerVec.y);
+
+        this.range.setCenterX(centerVec.x);
+        this.range.setCenterY(centerVec.y);
     }
 
     public Shape getShape() {

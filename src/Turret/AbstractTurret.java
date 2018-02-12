@@ -32,6 +32,8 @@ public abstract class AbstractTurret implements Drawable, Updateable {
         graphics.fill(getShape());
     }
 
+    public abstract void setFPos(int fPosX, int fPosY);
+
     public abstract Shape getShape();
     public abstract Shape getRange();
     public abstract Color getColor();
